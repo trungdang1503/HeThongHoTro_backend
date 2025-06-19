@@ -1,0 +1,27 @@
+# Build & Dependencies
+/target/
+/build/
+/out/
+node_modules/
+*.jar
+*.war
+
+# IDEs
+.idea/
+*.iml
+.project
+.classpath
+.settings/
+.vscode/
+
+# Logs
+*.log
+logs/
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+
+# Sensitive Information - Thêm các file của bạn vào đây
+.env
+application-local.properties
