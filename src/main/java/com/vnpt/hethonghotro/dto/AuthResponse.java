@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
-@AllArgsConstructor // Tạo constructor với tất cả các tham số
+@AllArgsConstructor
 public class AuthResponse {
     private String token;
 }

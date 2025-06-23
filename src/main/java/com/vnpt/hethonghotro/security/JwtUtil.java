@@ -33,7 +33,6 @@ public class JwtUtil {
         return extractClaim(token, Claims::getExpiration);
     }
 
-    // Thêm hàm này để lấy roles từ token
     public List<String> extractRoles(String token) {
         return extractClaim(token, claims -> claims.get("roles", List.class));
     }
@@ -47,7 +46,6 @@ public class JwtUtil {
         return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
     }
 
-    // *** ĐÃ SỬA LỖI: Chuyển 'private' thành 'public' ***
     public Boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());
     }

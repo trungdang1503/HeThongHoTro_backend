@@ -44,17 +44,14 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         }
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-
-            // *** THAY ĐỔI QUAN TRỌNG: Đọc quyền trực tiếp từ token ***
             if (!jwtUtil.isTokenExpired(jwt)) {
                 List<String> roles = jwtUtil.extractRoles(jwt);
                 List<SimpleGrantedAuthority> authorities = roles.stream()
                         .map(SimpleGrantedAuthority::new)
                         .collect(Collectors.toList());
 
-                // Không cần UserDetails nữa, chúng ta có đủ thông tin từ token
                 UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
-                        username, null, authorities); // Dùng username và authorities từ token
+                        username, null, authorities);
 
                 usernamePasswordAuthenticationToken
                         .setDetails(new WebAuthenticationDetailsSource().buildDetails(request));

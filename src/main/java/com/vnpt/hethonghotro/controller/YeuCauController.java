@@ -13,17 +13,15 @@ import java.util.Map;
 @RequestMapping("/api/yeu-cau")
 @RequiredArgsConstructor
 public class YeuCauController {
-
     private final YeuCauService yeuCauService;
 
     @PostMapping("/{id}/thao-tac")
     public ResponseEntity<?> xuLyHanhDong(
             @PathVariable String id,
             @Valid @RequestBody ThaoTacRequest request,
-            Authentication authentication // Spring Security sẽ tự động inject đối tượng này
+            Authentication authentication
     ) {
         try {
-            // Lấy username từ người dùng đã được xác thực
             String username = authentication.getName();
             yeuCauService.xuLyHanhDong(id, request, username);
 

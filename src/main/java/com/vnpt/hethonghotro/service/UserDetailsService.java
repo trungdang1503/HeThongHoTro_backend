@@ -22,21 +22,18 @@ public class UserDetailsService implements org.springframework.security.core.use
     private NguoiDungRepository nguoiDungRepository;
 
     @Autowired
-    private VaiTroRepository vaiTroRepository; // Thêm repository này
+    private VaiTroRepository vaiTroRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         NguoiDung nguoiDung = nguoiDungRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Không tìm thấy người dùng với username: " + username));
 
-        // *** THAY ĐỔI QUAN TRỌNG: Lấy vai trò từ CSDL ***
         List<VaiTro> roles = vaiTroRepository.findRolesByUsername(username);
         List<GrantedAuthority> authorities = roles.stream()
-                // Thêm tiền tố "ROLE_" theo quy ước của Spring Security
                 .map(role -> new SimpleGrantedAuthority("ROLE_" + role.getName().toUpperCase()))
                 .collect(Collectors.toList());
 
-        // Trả về đối tượng UserDetails với ĐẦY ĐỦ QUYỀN
         return new User(nguoiDung.getUsername(), nguoiDung.getPassword(), authorities);
     }
 }

@@ -10,7 +10,6 @@ public class VaiTro {
     @Id
     @Column(length = 36)
     private String id;
-
     @Column(nullable = false, length = 50)
     private String name;
 }

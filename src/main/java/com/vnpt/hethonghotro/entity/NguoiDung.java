@@ -7,7 +7,6 @@ import lombok.Data; // Hoặc tự tạo Getters/Setters
 @Entity
 @Table(name = "nguoi_dung")
 public class NguoiDung {
-
     @Id
     @Column(name = "username", length = 50)
     private String username;
